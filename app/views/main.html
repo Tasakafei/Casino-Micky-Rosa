@@ -1,0 +1,75 @@
+<div ng-controller="SocialController">
+  <div class="row text-center" ng-if="!isConnected">
+    <div fb-login class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+  </div>
+  <div class="ribbon-wrapper-green">
+    <div class="ribbon-green">Casino Micky Rosa</div>
+  </div>
+  <div class="chat">
+    <span class="page-header">Table</span>
+    <div ng-repeat="player in roundMateCards">
+      <div class="col-xs-6">{{player.name}}</div>
+      <div class="col-xs-6">{{player.cards}}</div>
+    </div>
+  </div>
+  <div id="playingTable" ng-show="isConnected" ng-controller="GameController">
+    <div class="container seeYou">
+      <div id="playingArea">
+
+
+        <div class="seeYou col-xs-2 col-xs-offset-1" id="scoreboard">
+          <p>Jetons : {{playerRoundsWon}}</p>
+          <p>Mise : {{betInGame}}</p>
+        </div>
+
+        <!-- ================ -->
+        <!-- Dealer Area -->
+        <!-- ================ -->
+
+        <div class="seeYou col-xs-8 col-xs-offset-2 row" id="dealerCards">
+          <div class="cardArea col-xs-offset-4">
+
+
+            <div ng-repeat="card in dealerCards" class="rotate-in">
+              <div card suit="{{card.suit}}" value="{{card.value}}" first="{{$first}}"></div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <!-- ================ -->
+        <!-- Player Area -->
+        <!-- ================ -->
+
+        <div class="seeYou col-xs-8 col-xs-offset-2 row" id="playerCards">
+          <div class="cardArea col-xs-offset-4">
+
+            <div ng-repeat="card in playerCards" class="rotate-in">
+              <div card suit="{{card.suit}}" value="{{card.value}}"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ================ -->
+        <!-- Control Area -->
+        <!-- ================ -->
+
+        <div class="seeYou col-xs-8 col-xs-offset-2 row" id="controls">
+          <div ng-show="betInGame == 0">
+            <div class="btn btn-primary btn-lg" ng-click="bet(10)">Bet 10</div>
+            <div class="btn btn-primary btn-lg" ng-click="bet(50)">Bet 50</div>
+            <div class="btn btn-primary btn-lg" ng-click="bet(100)">Bet 100</div>
+          </div>
+          <div ng-show="betInGame != 0">
+            <div class="btn btn-primary btn-lg" ng-click="hit()">Hit</div>
+            <div class="btn btn-primary btn-lg" ng-click="stand()">Stand</div>
+            <div class="btn btn-primary btn-lg" ng-click="double()">Double</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- ============ End GameController ============ -->
+</div>
